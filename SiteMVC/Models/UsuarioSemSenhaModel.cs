@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SiteMVC.Models
 {
-    public class UsuarioModel
+    public class UsuarioSemSenhaModel
     {
         public int Id { get; set; }
         [Required(ErrorMessage = "Digite o nome do contato")]
@@ -17,9 +17,5 @@ namespace SiteMVC.Models
         public byte[]? Foto { get; set; }
         [Required(ErrorMessage = "Informa o perfil do usuário")]
         public PerfilEnum? Perfil { get; set; }
-        [Required(ErrorMessage = "Digite a senha do contato")]
-        public string Senha { get; set; }
-        public DateTime DataCadastro { get; set; }
-        public DateTime? DataAtualizacao { get; set; }
     }
 }

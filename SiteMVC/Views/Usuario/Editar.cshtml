@@ -2,15 +2,16 @@
 @model UsuarioModel
 
 @{
-    ViewData["Title"] = "Cadastro de Contato";
+    ViewData["Title"] = "Edição de Contato";
 }
 
 <div class="center">
-    <h1>Cadastrar Usuario</h1>
-
+    <h1>Editar Usuario</h1>
 </div>
 
-<form asp-controller="Usuario" asp-action="Criar" method="post" enctype="multipart/form-data">
+<form asp-controller="Usuario" asp-action="Editar" method="post" enctype="multipart/form-data">
+    <input type="hidden" asp-for="Id"/>
+
     <div class="form-group">
         <label for="Nome">Nome</label>
         <input type="text" asp-for="Nome" class="form-control" placeholder="Digite o nome do Usuario">
@@ -26,13 +27,6 @@
         <input type="text" asp-for="Login" class="form-control" placeholder="Digite o login do Usuario">
         @Html.ValidationMessageFor(x => x.Login)
     </div>
-    <br/>
-    <div class="form-group">
-        <label for="Senha">Senha</label>
-        <input type="password" asp-for="Senha" class="form-control" placeholder="Digite a senha do Usuario">
-        @Html.ValidationMessageFor(x => x.Senha)
-    </div>
-    <br />
     <div class="form-group">
         <label for="Perfil">Perfil</label>
         <select asp-for="Perfil" class="form-control">
@@ -44,10 +38,15 @@
     </div>
     <div class="form-group">
         <label for="Foto">Foto de Perfil</label>
-        <input type="file" asp-for="Foto" class="form-control" accept=".jpg,.jpeg,.png">
-
+        <input type="file" asp-for="Foto" class="form-control" accept=".jpg,.jpeg,.png" />
+        @if (Model.Foto != null && Model.Foto.Length > 0)
+        {
+            <div>
+                <img src="@Url.Action("GetImage", "Usuario", new { id = Model.Id })" alt="Foto de Perfil" style="max-width: 200px; max-height: 200px;" />
+            </div>
+        }
     </div>
     <br />
-    <button type="submit" class="btn btn-primary btn-block">Adicionar</button>
+    <button type="submit" class="btn btn-primary btn-block">Editar</button>
     <a class="btn btn-secondary btn-block" asp-controller="Usuario" asp-action="Index" role="button">Voltar</a>
 </form>
